@@ -25,3 +25,38 @@ def solution(participant, completion):
             return a
         
     return participant[-1]
+
+# 스터디 박상민님 풀이
+from collections import Counter
+
+def solution(participant, completion):
+    return list((Counter(participant) - Counter(completion)).keys())[0]
+
+// Counter 끼리 연산이 되는것 같더라구요! 직접해보시면 뭔지 아실거에요! 
+
+# 스터디 문준호님 풀이
+def solution(participant, completion):
+    hash ={}
+    for i in participant:
+        if i in hash:
+            hash[i] += 1
+        else:
+            hash[i] = 1
+    for i in completion:
+        if hash[i] == 1: 
+            del hash[i]
+        else:
+            hash[i] -= 1 
+    answer = list(hash.keys())[0] 
+    return answer
+
+# 스터디 오다혜님 풀이
+def solution(participant, completion):
+    participant.sort()
+    completion.sort()
+    big = participant if len(participant) > len(completion) else completion
+    small = participant if len(participant) < len(completion) else completion
+    for i in range(len(small)):
+        if(participant[i] != completion[i]):
+            return big[i]
+    return big[-1]
