@@ -43,3 +43,25 @@ while q:
             q.append(0)
     
 print(time)
+
+# deque를 이용한 풀이
+
+from collections import deque
+
+def solution(bridge_length, weight, truck_weights):
+    truck_weights = deque(truck_weights)
+    bridge = deque([0] * bridge_length)
+    time = 0
+    sum_truck = 0
+    while bridge:
+        time += 1
+        sum_truck -= bridge.popleft()
+        
+        if truck_weights:
+            if sum_truck + truck_weights[0] <= weight:
+                truck = truck_weights.popleft()
+                bridge.append(truck)
+                sum_truck += truck
+            else:
+                bridge.append(0)
+    return time
