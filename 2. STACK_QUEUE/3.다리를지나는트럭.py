@@ -35,7 +35,7 @@ q = [0] * bridge_length
     
 while q:
     time += 1
-    q.pop(0)
+    q.pop(0)  # 데큐에서 popleft() 한거랑 똑같다. 하지만 데큐가 시간복잡도가 훨 좋다
     if truck_weights:
         if sum(q) + truck_weights[0] <= weight:
             q.append(truck_weights.pop(0))
