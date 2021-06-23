@@ -54,3 +54,27 @@ def solution(scoville, K):
 정확성: 71.4
 효율성: 23.8
 합계: 95.2 / 100.0
+    
+    
+# 시도 3차
+import heapq
+
+def solution(scoville, K):
+    count = 0
+    heapq.heapify(scoville)
+    
+    while len(scoville) >= 2:
+        min1 = heapq.heappop(scoville)
+        
+        if min1 >= K:
+            break
+        else:
+            min2 = heapq.heappop(scoville)
+            heapq.heappush(scoville, min1 + (min2*2))
+            count += 1
+            
+    if scoville[0] >= K:
+        return count
+            
+    else:
+        return -1
